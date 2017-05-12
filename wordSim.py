@@ -41,7 +41,7 @@ def levenshtein(s1, s2):
     if len(s2) == 0:
         return len(s1)
  
-    previous_row = range(len(s2) + 1)
+    previous_row = list(range(len(s2) + 1))
     for i, c1 in enumerate(s1):
         current_row = [i + 1]
         for j, c2 in enumerate(s2):
@@ -88,10 +88,10 @@ def wordRelatedness(word1, pos1, word2, pos2):
     if stemmer.stem(word1).lower() == stemmer.stem(word2).lower():
         return 1
 
-    if canonicalWord1.isdigit() and canonicalWord2.isdigit() and canonicalWord1 <> canonicalWord2:
+    if canonicalWord1.isdigit() and canonicalWord2.isdigit() and canonicalWord1 != canonicalWord2:
         return 0
 
-    if pos1.lower() == 'cd' and pos2.lower() == 'cd' and (not canonicalWord1.isdigit() and not canonicalWord2.isdigit()) and canonicalWord1 <> canonicalWord2:
+    if pos1.lower() == 'cd' and pos2.lower() == 'cd' and (not canonicalWord1.isdigit() and not canonicalWord2.isdigit()) and canonicalWord1 != canonicalWord2:
         return 0
 
     # stopwords can be similar to only stopwords

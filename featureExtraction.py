@@ -1,4 +1,4 @@
-from __future__ import division
+
 
 from config import *
 from align import *
@@ -15,7 +15,7 @@ def load_embeddings(file_name):
     for line in input_file:
         tokens = line.split('\t')
         tokens[-1] = tokens[-1].strip()
-        for i in xrange(1, len(tokens)):
+        for i in range(1, len(tokens)):
             tokens[i] = float(tokens[i])
         embeddings[tokens[0]] = tokens[1:-1]
 
@@ -28,7 +28,7 @@ def vector_sum(vectors):
     d = len(vectors[0])
 
     s = []
-    for i in xrange(d):
+    for i in range(d):
         s.append(0)
     s = np.array(s)
 
@@ -127,10 +127,10 @@ def sts_cvm(sentence1, sentence2,
     global embeddings
     
     if embeddings == {}:
-        print 'loading embeddings...'
+        print('loading embeddings...')
         embeddings = \
            load_embeddings('Resources/EN-wform.w.5.cbow.neg10.400.subsmpl.txt')
-        print 'done'    
+        print('done')    
 
     sentence1_parse_result = parse_results[0]
     sentence2_parse_result = parse_results[1]

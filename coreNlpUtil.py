@@ -24,12 +24,12 @@ def parseText(sentences):
 
     wordOffset = 0
 
-    for i in xrange(len(parseResult['sentences'])):
+    for i in range(len(parseResult['sentences'])):
 
         if i>0:
-            for j in xrange(len(parseResult['sentences'][i]['dependencies'])):
+            for j in range(len(parseResult['sentences'][i]['dependencies'])):
 
-                for k in xrange(1,3):
+                for k in range(1,3):
                     tokens = \
                         parseResult['sentences'][i]['dependencies'][j][k].split('-')
                     if tokens[0] == 'ROOT':
@@ -43,7 +43,7 @@ def parseText(sentences):
                                              tokens[0]+ '-' + str(newWordIndex)
                     else:
                         w = ''
-                        for l in xrange(len(tokens)-1):
+                        for l in range(len(tokens)-1):
                             w += tokens[l]
                             if l<len(tokens)-2:
                                 w += '-'
@@ -54,7 +54,7 @@ def parseText(sentences):
 
 
     # merge information of all sentences into one
-    for i in xrange(1,len(parseResult['sentences'])):
+    for i in range(1,len(parseResult['sentences'])):
         parseResult['sentences'][0]['text'] += \
                                     ' ' + parseResult['sentences'][i]['text']
         for jtem in parseResult['sentences'][i]['dependencies']:
@@ -76,7 +76,7 @@ def nerWordAnnotator(parseResult):
     res = []
 
     wordIndex = 1
-    for i in xrange(len(parseResult['sentences'][0]['words'])):
+    for i in range(len(parseResult['sentences'][0]['words'])):
         tag = \
          [[parseResult['sentences'][0]['words'][i][1]['CharacterOffsetBegin'], 
            parseResult['sentences'][0]['words'][i][1]['CharacterOffsetEnd']], 
@@ -84,7 +84,7 @@ def nerWordAnnotator(parseResult):
           parseResult['sentences'][0]['words'][i][1]['NamedEntityTag']]
         wordIndex += 1
 
-        if tag[3] <> 'O':
+        if tag[3] != 'O':
             res.append(tag)
 
 
@@ -102,7 +102,7 @@ def ner(parseResult):
     currentCharacterOffsets = []
     currentWordOffsets = []
 
-    for i in xrange(len(nerWordAnnotations)):
+    for i in range(len(nerWordAnnotations)):
 
                
         if i == 0:
@@ -148,7 +148,7 @@ def posTag(parseResult):
     res = []
 
     wordIndex = 1
-    for i in xrange(len(parseResult['sentences'][0]['words'])):
+    for i in range(len(parseResult['sentences'][0]['words'])):
         tag = \
          [[parseResult['sentences'][0]['words'][i][1]['CharacterOffsetBegin'], 
            parseResult['sentences'][0]['words'][i][1]['CharacterOffsetEnd']], 
@@ -170,7 +170,7 @@ def lemmatize(parseResult):
     res = []
 
     wordIndex = 1
-    for i in xrange(len(parseResult['sentences'][0]['words'])):
+    for i in range(len(parseResult['sentences'][0]['words'])):
         tag = \
          [[parseResult['sentences'][0]['words'][i][1]['CharacterOffsetBegin'], 
            parseResult['sentences'][0]['words'][i][1]['CharacterOffsetEnd']], 
@@ -267,17 +267,17 @@ def findParents(dependencyParse, wordIndex, word):
     else:
         # find the closest following word index which is in the list
         nextIndex = 0
-        for i in xrange(len(wordsWithIndices)):
+        for i in range(len(wordsWithIndices)):
             if wordsWithIndices[i][0] > wordIndex:
                 nextIndex = wordsWithIndices[i][0]
                 break
         if nextIndex == 0:
             return [] #?
-        for i in xrange(len(dependencyParse)):
+        for i in range(len(dependencyParse)):
             if int(dependencyParse[i][2].split('{')[1].split('}')[0].split(' ')[2]) == nextIndex:
                    pos = i
                    break
-        for i in xrange(pos, len(dependencyParse)):
+        for i in range(pos, len(dependencyParse)):
             if '_' in dependencyParse[i][0] and word in dependencyParse[i][0]:
                 parent = \
                     [int(dependencyParse[i][1].split('{')[1].split('}')[0].split(' ')[2]), 
@@ -322,18 +322,18 @@ def findChildren(dependencyParse, wordIndex, word):
     else:
         # find the closest following word index which is in the list
         nextIndex = 0
-        for i in xrange(len(wordsWithIndices)):
+        for i in range(len(wordsWithIndices)):
             if wordsWithIndices[i][0] > wordIndex:
                 nextIndex = wordsWithIndices[i][0]
                 break
 
         if nextIndex == 0:
             return []
-        for i in xrange(len(dependencyParse)):
+        for i in range(len(dependencyParse)):
             if int(dependencyParse[i][2].split('{')[1].split('}')[0].split(' ')[2]) == nextIndex:
                    pos = i
                    break
-        for i in xrange(pos, len(dependencyParse)):
+        for i in range(pos, len(dependencyParse)):
             if '_' in dependencyParse[i][0] and word in dependencyParse[i][0]:
                 child = \
                     [int(dependencyParse[i][2].split('{')[1].split('}')[0].split(' ')[2]), 

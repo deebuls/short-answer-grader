@@ -135,14 +135,14 @@ def construct_train_examples(train_data):
         ref_answer = data_for_this_question[1]
         student_answers = data_for_this_question[2]
         scores = data_for_this_question[3]
-        for i in xrange(len(student_answers)):
+        for i in range(len(student_answers)):
             features = extract_features(question, ref_answer,
                                         student_answers[i])
             score = scores[i]
             train_examples.append((features, score))
             
             n += 1
-            print n,
+            print(n, end=' ')
 
     return train_examples
     
@@ -167,20 +167,20 @@ def grade(question, ref_answer, student_response, grader):
 
 
 
-print 'reading train data from files...'
+print('reading train data from files...')
 train_data = read_train_data()
-print 'done.'
-print
+print('done.')
+print()
 
-print 'extracting features and constructing training examples...'
+print('extracting features and constructing training examples...')
 train_examples = construct_train_examples(train_data)
-print 'done.'
-print
+print('done.')
+print()
 
-print 'training the grading model...'
+print('training the grading model...')
 grader = train_grader(train_examples)
-print 'done.'
-print
+print('done.')
+print()
 
 question = "What is a variable?"
 ref_answer = "A location in memory that can store a value."
@@ -190,4 +190,4 @@ student_response = "In programming, a structure that holds data and is " + \
                    "program is finished."
 
 score = grade(question, ref_answer, student_response, grader)
-print score
+print(score)

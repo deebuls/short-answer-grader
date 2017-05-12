@@ -64,5 +64,5 @@ student_response = "computers usually convert infix expressions to postfix " +\
                    "expression and evaluate them using a stack."
                    
 score = grade(question, ref_answer, student_response)
-print
-print 'score for this student response = ' + str(score) + '%'
+print()
+print(('score for this student response = ' + str(score) + '%'))

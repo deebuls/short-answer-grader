@@ -1,4 +1,4 @@
-from __future__ import division
+
 
 from sklearn.linear_model import Ridge
 import numpy as np
